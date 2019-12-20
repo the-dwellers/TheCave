@@ -1,0 +1,9 @@
+Watcher:
+	Notification system
+Manager:
+	user management
+Wyrm:
+	Bot management system
+	☐ Start bot
+	☐ Shutdown bot
+	☐ View running Bots
