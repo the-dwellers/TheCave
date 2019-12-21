@@ -32,4 +32,5 @@ func tick(s *discordgo.Session) {
 
 func ready(s *discordgo.Session, event *discordgo.Ready) {
 	s.UpdateStatus(0, "Started...")
+	s.ChannelMessageSend(Debug.notificationChannel, Wyrm.getResponse(greet))
 }
