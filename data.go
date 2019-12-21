@@ -14,8 +14,8 @@ const (
 )
 
 type response struct {
-	state    query
-	response string
+	state     query
+	responses []string
 }
 
 // Watcher : Notification bot
@@ -23,12 +23,8 @@ var Watcher = botInfo{
 	name:  "Watcher",
 	token: WatcherToken,
 	responses: []response{
-		response{state: greet, response: "What do you want?"},
-		response{state: greet, response: "Yes?"},
-		response{state: greet, response: "Anything you need?"},
-		response{state: quit, response: "Cya!"},
-		response{state: quit, response: "Somebody take over for me?"},
-		response{state: quit, response: "Gone for tea"},
+		response{state: greet, responses: []string{"What do you want?", "Yes?", "Anything you need?"}},
+		response{state: quit, responses: []string{"Cya!", "Somebody take over for me?", "Gone for tea"}},
 	}}
 
 // Wyrm : Bot manager

@@ -1,3 +1,37 @@
+Common:
+	☐ Construct Response Structure
+
+	One main question about responses is the structure they are stored in.
+	Responses are inherently string literals that are used as reply's to user
+	actions and messages. These are basically canned messages in an attempt to
+	make the bot more 'organic' by varying responses in a non-structured format.
+
+	The naïve approach is to use an array of string literals, and randomly
+	select one as a response. this has the downside of potentially repeated
+	responses, which can be alleviated with pseudorandom selection, queues, or just
+	plain data saturation.
+
+	However, this does not provide an organic interaction with any user, since
+	responses are picked with no regards to context. A solution would be
+	conditions placed on each response, and then each response is evaluated and
+	the one that meets the conditions is picked.
+
+	The condition approach does require more computational power, and thus
+	causes strain on the host hardware. A mitigating approach would be to have
+	different collections of responses under certain circumstances, and blend
+	the conditional approach with random selection.
+
+	I personally think that the best method would include a data store of the
+	current context the reply would be in, including user data, channel data,
+	and a bunch of other things. Then a response is constructed from some base
+	templates, with regards to current context information. the base template
+	can be randomly selected, and assuming the context data is rich, and enough
+	templates exist, a near-natural response system is possible.
+
+	However, how on earth do you store this data in a structured, but efficient
+	format? The bot also still needs to be able to function with no data
+	collected, which brings back the original problem.
+
 Watcher:
 	Notification system
 Manager:
