@@ -1,11 +1,16 @@
 package main
 
-import "math/rand"
+import (
+	"math/rand"
+
+	"github.com/bwmarrin/discordgo"
+)
 
 type caveBot struct {
 	name      string
 	token     string
 	responses []response
+	intent    discordgo.Intent
 }
 
 type query int
@@ -40,7 +45,9 @@ var Watcher = caveBot{
 	responses: []response{
 		response{state: greet, responses: []string{"What do you want?", "Yes?", "Anything you need?"}},
 		response{state: quit, responses: []string{"Cya!", "Somebody take over for me?", "Gone for tea"}},
-	}}
+	},
+	intent: discordgo.IntentsGuildMessages,
+}
 
 // Wyrm : Bot manager
 var Wyrm = caveBot{
@@ -49,7 +56,9 @@ var Wyrm = caveBot{
 	responses: []response{
 		response{state: greet, responses: []string{"What do you want?", "Yes?", "Anything you need?"}},
 		response{state: quit, responses: []string{"Cya!", "Somebody take over for me?", "Gone for tea"}},
-	}}
+	},
+	intent: discordgo.IntentsGuildMessages,
+}
 
 // Manager : User Manager
 var Manager = caveBot{name: "Manager", token: ManagerToken}
