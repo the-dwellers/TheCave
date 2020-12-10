@@ -6,7 +6,8 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-type caveBot struct {
+// CaveBot : Simple Bot Structure
+type CaveBot struct {
 	name      string
 	token     string
 	responses []response
@@ -15,7 +16,7 @@ type caveBot struct {
 
 type query int
 
-func (bot caveBot) getResponse(queryType query) string {
+func (bot CaveBot) getResponse(queryType query) string {
 	for _, response := range bot.responses {
 		if response.state == queryType {
 			return response.responses[rand.Intn(len(response.responses))]
@@ -39,7 +40,7 @@ type debugValues struct {
 }
 
 // Watcher : Notification bot
-var Watcher = caveBot{
+var Watcher = CaveBot{
 	name:  "Watcher",
 	token: WatcherToken,
 	responses: []response{
@@ -50,7 +51,7 @@ var Watcher = caveBot{
 }
 
 // Wyrm : Bot manager
-var Wyrm = caveBot{
+var Wyrm = CaveBot{
 	name:  "Wyrm",
 	token: WyrmToken,
 	responses: []response{
@@ -61,7 +62,18 @@ var Wyrm = caveBot{
 }
 
 // Manager : User Manager
-var Manager = caveBot{name: "Manager", token: ManagerToken}
+var Manager = CaveBot{name: "Manager", token: ManagerToken}
+
+// CarolineBot : Broadcasting music bot
+var CarolineBot = CaveBot{
+	name:  "Caroline",
+	token: CarolineToken,
+	responses: []response{
+		response{state: greet, responses: []string{"What do you want", "Yes?", "Anything you need?"}},
+		response{state: quit, responses: []string{"Cya!", "Somebody take over for me?", "Gone for tea"}},
+	},
+	intent: discordgo.IntentsGuildMessages | discordgo.IntentsGuildVoiceStates,
+}
 
 // Debug : Values used for debugging bots
 var Debug = debugValues{notificationChannel: "540531918769225738"}

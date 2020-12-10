@@ -10,26 +10,26 @@ import (
 )
 
 func main() {
-	bot := Wyrm
-	discord, err := discordgo.New("Bot " + bot.token)
+	bot := Caroline
+	discord, err := discordgo.New("Bot " + bot.bot.token)
 	if err != nil {
 		fmt.Printf("! Error starting discord session: %s", err)
 	}
 
 	// Handlers
-	discord.AddHandler(ready)
-	discord.AddHandler(messageReceived)
+	discord.AddHandler(bot.messageReceived)
 
 	// Intent
-	discord.Identify.Intents = discordgo.MakeIntent(bot.intent)
+	discord.Identify.Intents = discordgo.MakeIntent(bot.bot.intent)
 
 	// Start
+	discord.StateEnabled = true
 	discord.Open()
-	fmt.Printf("%s is now running. Press Ctrl-C to exit.\n", bot.name)
+	fmt.Printf("%s is now running. Press Ctrl-C to exit.\n", bot.bot.name)
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
 	<-sc
-	discord.ChannelMessageSend(Debug.notificationChannel, bot.getResponse(quit))
+	// discord.ChannelMessageSend(Debug.notificationChannel, bot.bot.getResponse(quit))
 	discord.Close()
 }
 
